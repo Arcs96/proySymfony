@@ -104,12 +104,13 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/alojamiento", name="alojamiento")
+   * @Route("/alojamiento/{nom}", name="alojamiento")
    */
-  public function alojamientoAction()
+  public function alojamientoAction($nom)
   {
-    /* Esta acción en un futuro nos mostrará los detallas de cada alojamiento */
-      //return $this->render('RuralBundle:Default:alojamiento.html.twig');
+      $repository = $this->getDoctrine()->getRepository('RuralBundle:Alojamiento');
+      $alojamiento = $repository->findByNom_alojamiento($nom);
+      return $this->render('RuralBundle:Default:alojamiento.html.twig',array("alojamientos"=>$alojamiento));
   }
 
 }

@@ -10,9 +10,18 @@
 </div>
 
 <!-- Content -->
+{% for alojamiento in alojamientos %}
 <div class="container div-content" style="background:white;  margin-bottom: 15px;">
-  <h2>Casas Cerrete de Haro</h2>
+  <h2>{{ alojamiento.nomAlojamiento }}</h2>
+  <a href="{{
+   path(
+      'formdelete',
+     { 'id': alojamiento.id }
+   )
+  }}">delete</a>
 </div>
+
+{% endfor %}
 <div class="container">
 
       <div id="carouselExampleIndicators" class="carousel slide div-content" data-ride="carousel" style="width:770px; height:350px; padding:10px">

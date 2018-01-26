@@ -34,6 +34,14 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="roles", type="json_array")
+     */
+    private $roles = array();
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
@@ -60,6 +68,20 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return Usuario
+     */
+     public function setRoles(array $roles)
+     {
+         $this->roles = $roles;
+         // allows for chaining
+         return $this;
+     }
 
     /**
      * Set username

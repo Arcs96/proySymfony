@@ -25,9 +25,11 @@ class RegistroController extends Controller
       if ($form->isSubmitted() && $form->isValid()) {
 
         // 3) Encode the password (you could also do this via Doctrine listener)
+        $role = ['ROLE_USER'];
         $password = $this->get('security.password_encoder')
             ->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
+        $user->setRoles($role);
 
         // 4) save the User!
         $em = $this->getDoctrine()->getManager();

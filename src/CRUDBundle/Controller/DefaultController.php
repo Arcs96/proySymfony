@@ -57,7 +57,10 @@ class DefaultController extends Controller
           $em->persist($alojamiento);
           $em->flush();
 
-          return $this->redirectToRoute('alojamiento_show', array('id' => $alojamiento->getId()));
+          //return $this->redirectToRoute('alojamiento_show', array('id' => $alojamiento->getId()));
+          $data['alojamiento'][] = $this->serializeAlojamiento($alojamiento);
+          $response = new JsonResponse($data, 200);
+          return $response;
       }
 
       return $this->render('crud/new.html.twig', array(
@@ -81,11 +84,6 @@ class DefaultController extends Controller
       $data['alojamiento'][] = $this->serializeAlojamiento($alojamiento);
       $response = new JsonResponse($data, 200);
       return $response;
-
-      /*return $this->render('crud/show.html.twig', array(
-          'alojamiento' => $alojamiento,
-          'delete_form' => $deleteForm->createView(),
-      ));*/
   }
 
   /**
@@ -103,7 +101,10 @@ class DefaultController extends Controller
       if ($editForm->isSubmitted() && $editForm->isValid()) {
           $this->getDoctrine()->getManager()->flush();
 
-          return $this->redirectToRoute('alojamiento_edit', array('id' => $alojamiento->getId()));
+          //return $this->redirectToRoute('alojamiento_edit', array('id' => $alojamiento->getId()));
+          $data['alojamiento'][] = $this->serializeAlojamiento($alojamiento);
+          $response = new JsonResponse($data, 200);
+          return $response;
       }
 
       return $this->render('crud/edit.html.twig', array(
@@ -128,9 +129,13 @@ class DefaultController extends Controller
           $em = $this->getDoctrine()->getManager();
           $em->remove($alojamiento);
           $em->flush();
+
+          $data['alojamiento'][] = $this->serializeAlojamiento($alojamiento);
+          $response = new JsonResponse($data, 200);
       }
 
-      return $this->redirectToRoute('alojamiento_index');
+      return $response;
+      //return $this->redirectToRoute('alojamiento_index');
   }
 
   /**

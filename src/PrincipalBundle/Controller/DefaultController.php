@@ -42,7 +42,7 @@ class DefaultController extends Controller
   }
 
   /**
-   * @Route("/usuarios/login", name="login")
+   * @Route("/login", name="login")
    */
   public function loginAction(Request $request)
   {
